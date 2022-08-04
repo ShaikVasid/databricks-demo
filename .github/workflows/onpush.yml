@@ -17,26 +17,26 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
         if: github.ref == '/refs/heads/dev'
-      - name: Set up Python
+      - name: Set up Python on Dev
         uses: actions/setup-python@v2
         with:
           databricks-host: https://adb-1171939023690387.7.azuredatabricks.net/
           databricks-token: ${{ secrets.DATABRICKS_DEV_TOKEN }}		
           python-version: 3.7.5
 
-      - name: Install pip
+      - name: Install pip on Dev
         run: |
           python -m pip install --upgrade pip
           pip install databricks_cli
         if: github.ref == '/refs/heads/main'			
-      - name: Set up Python
+      - name: Set up Python on Prod
         uses: actions/setup-python@v2
         with:
           databricks-host: https://adb-2363935646913262.2.azuredatabricks.net/
           databricks-token: ${{ secrets.DATABRICKS_PROD_TOKEN }}
           python-version: 3.7.5
 
-      - name: Install pip
+      - name: Install pip on Prod
         run: |
           python -m pip install --upgrade pip
           pip install databricks_cli	
